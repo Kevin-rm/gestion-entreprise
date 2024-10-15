@@ -2,19 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\AntecedentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AntecedentRepository::class)]
-class Antecedent
+class Antecedent extends AbstractPrefixedIdEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
@@ -27,11 +23,6 @@ class Antecedent
     public function __construct()
     {
         $this->fournisseurs = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getLibelle(): ?string
@@ -71,5 +62,15 @@ class Antecedent
         }
 
         return $this;
+    }
+
+    function getPrefix(): string
+    {
+        return "ANT";
+    }
+
+    function getSequenceName(): string
+    {
+        return "ID_ANTECEDENT_SEQ";
     }
 }

@@ -2,21 +2,20 @@
 
 namespace App\Entity;
 
+use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\FournisseurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
-class Fournisseur
+class Fournisseur extends AbstractPrefixedIdEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+    private ?string $nomEntreprise = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email = null;
 
     /**
      * @var Collection<int, Antecedent>
@@ -24,31 +23,31 @@ class Fournisseur
     #[ORM\ManyToMany(targetEntity: Antecedent::class, inversedBy: 'fournisseurs')]
     private Collection $antecedents;
 
-    /**
-     * @var Collection<int, Article>
-     */
-    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'fournisseurs')]
-    private Collection $articles;
-
     public function __construct()
     {
         $this->antecedents = new ArrayCollection();
-        $this->articles = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getNomEntreprise(): ?string
     {
-        return $this->id;
+        return $this->nomEntreprise;
     }
 
-    public function getNom(): ?string
+    public function setNomEntreprise(string $nomEntreprise): static
     {
-        return $this->nom;
+        $this->nomEntreprise = $nomEntreprise;
+
+        return $this;
     }
 
-    public function setNom(string $nom): static
+    public function getEmail(): ?string
     {
-        $this->nom = $nom;
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
 
         return $this;
     }
@@ -77,30 +76,13 @@ class Fournisseur
         return $this;
     }
 
-    /**
-     * @return Collection<int, Article>
-     */
-    public function getArticles(): Collection
+    function getPrefix(): string
     {
-        return $this->articles;
+        return "FRN";
     }
 
-    public function addArticle(Article $article): static
+    function getSequenceName(): string
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->addFournisseur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): static
-    {
-        if ($this->articles->removeElement($article)) {
-            $article->removeFournisseur($this);
-        }
-
-        return $this;
+        return "ID_FOURNISSEUR_SEQ";
     }
 }

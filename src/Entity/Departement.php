@@ -2,19 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\DepartementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DepartementRepository::class)]
-class Departement
+class Departement extends AbstractPrefixedIdEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
@@ -27,11 +23,6 @@ class Departement
     public function __construct()
     {
         $this->utilisateurs = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getNom(): ?string
@@ -74,5 +65,15 @@ class Departement
         }
 
         return $this;
+    }
+
+    function getPrefix(): string
+    {
+        return "DEPT";
+    }
+
+    function getSequenceName(): string
+    {
+        return "ID_DEPARTEMENT_SEQ";
     }
 }
