@@ -20,9 +20,9 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     private ?Fournisseur $fournisseur = null;
 
     /**
-     * @var Collection<int, DetailsAchat>
+     * @var Collection<int, DetailsDemandeAchat>
      */
-    #[ORM\OneToMany(targetEntity: DetailsAchat::class, mappedBy: 'demandeAchat', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: DetailsDemandeAchat::class, mappedBy: 'demandeAchat', orphanRemoval: true)]
     private Collection $detailsAchats;
 
     public function __construct()
@@ -55,14 +55,14 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     }
 
     /**
-     * @return Collection<int, DetailsAchat>
+     * @return Collection<int, DetailsDemandeAchat>
      */
     public function getDetailsAchats(): Collection
     {
         return $this->detailsAchats;
     }
 
-    public function addDetailsAchat(DetailsAchat $detailsAchat): static
+    public function addDetailsAchat(DetailsDemandeAchat $detailsAchat): static
     {
         if (!$this->detailsAchats->contains($detailsAchat)) {
             $this->detailsAchats->add($detailsAchat);
@@ -72,7 +72,7 @@ class DemandeAchat extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    public function removeDetailsAchat(DetailsAchat $detailsAchat): static
+    public function removeDetailsAchat(DetailsDemandeAchat $detailsAchat): static
     {
         if ($this->detailsAchats->removeElement($detailsAchat)) {
             // set the owning side to null (unless already changed)

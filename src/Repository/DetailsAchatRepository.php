@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\DetailsAchat;
+use App\Entity\DetailsDemandeAchat;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<DetailsAchat>
+ * @extends ServiceEntityRepository<DetailsDemandeAchat>
  */
 class DetailsAchatRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, DetailsAchat::class);
+        parent::__construct($registry, DetailsDemandeAchat::class);
     }
 
 //    /**
-//     * @return DetailsAchat[] Returns an array of DetailsAchat objects
+//     * @return DetailsDemandeAchat[] Returns an array of DetailsDemandeAchat objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -31,7 +31,7 @@ class DetailsAchatRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?DetailsAchat
+//    public function findOneBySomeField($value): ?DetailsDemandeAchat
 //    {
 //        return $this->createQueryBuilder('d')
 //            ->andWhere('d.exampleField = :val')

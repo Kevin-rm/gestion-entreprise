@@ -8,14 +8,14 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DetailsAchatRepository::class)]
-class DetailsAchat extends AbstractPrefixedIdEntity
+class DetailsDemandeAchat extends AbstractPrefixedIdEntity
 {
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(name: "id_produit", nullable: false)]
     private ?Produit $produit = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $prixUnitaire = null;
+    private ?string $coutUnitaireEstime = null;
 
     #[ORM\Column]
     private ?float $quantite = null;
@@ -36,14 +36,14 @@ class DetailsAchat extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    public function getPrixUnitaire(): ?string
+    public function getCoutUnitaireEstime(): ?string
     {
-        return $this->prixUnitaire;
+        return $this->coutUnitaireEstime;
     }
 
-    public function setPrixUnitaire(string $prixUnitaire): static
+    public function setCoutUnitaireEstime(string $coutUnitaireEstime): static
     {
-        $this->prixUnitaire = $prixUnitaire;
+        $this->coutUnitaireEstime = $coutUnitaireEstime;
 
         return $this;
     }
@@ -74,11 +74,11 @@ class DetailsAchat extends AbstractPrefixedIdEntity
 
     function getPrefix(): string
     {
-        return "DETACHT";
+        return "DETDMDACHT";
     }
 
     function getSequenceName(): string
     {
-        return "ID_DETAILS_ACHAT_SEQ";
+        return "ID_DETAILS_DEMANDE_ACHAT_SEQ";
     }
 }
