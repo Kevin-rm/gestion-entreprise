@@ -13,6 +13,7 @@ class Produit extends AbstractPrefixedIdEntity
     private ?string $designation = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(name: "id_unite")]
     private ?Unite $unite = null;
 
     public function getDesignation(): ?string

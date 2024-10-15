@@ -30,7 +30,7 @@ class Utilisateur extends AbstractPrefixedIdEntity implements UserInterface, Pas
     private ?string $password = null;
 
     #[ORM\ManyToOne(inversedBy: 'utilisateurs')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "id_departement", nullable: false)]
     private ?Departement $departement = null;
 
     /**

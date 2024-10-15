@@ -2,28 +2,32 @@
 
 namespace App\Entity;
 
+use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\DemandeAchatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DemandeAchatRepository::class)]
-class DemandeAchat
+class DemandeAchat extends AbstractPrefixedIdEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\ManyToOne(inversedBy: 'demandeAchats')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "id_utilisateur", nullable: false)]
     private ?Utilisateur $utilisateur = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "id_fournisseur", nullable: false)]
     private ?Fournisseur $fournisseur = null;
 
-    public function getId(): ?int
+    /**
+     * @var Collection<int, DetailsAchat>
+     */
+    #[ORM\OneToMany(targetEntity: DetailsAchat::class, mappedBy: 'demandeAchat', orphanRemoval: true)]
+    private Collection $detailsAchats;
+
+    public function __construct()
     {
-        return $this->id;
+        $this->detailsAchats = new ArrayCollection();
     }
 
     public function getUtilisateur(): ?Utilisateur
@@ -48,5 +52,45 @@ class DemandeAchat
         $this->fournisseur = $fournisseur;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailsAchat>
+     */
+    public function getDetailsAchats(): Collection
+    {
+        return $this->detailsAchats;
+    }
+
+    public function addDetailsAchat(DetailsAchat $detailsAchat): static
+    {
+        if (!$this->detailsAchats->contains($detailsAchat)) {
+            $this->detailsAchats->add($detailsAchat);
+            $detailsAchat->setDemandeAchat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsAchat(DetailsAchat $detailsAchat): static
+    {
+        if ($this->detailsAchats->removeElement($detailsAchat)) {
+            // set the owning side to null (unless already changed)
+            if ($detailsAchat->getDemandeAchat() === $this) {
+                $detailsAchat->setDemandeAchat(null);
+            }
+        }
+
+        return $this;
+    }
+
+    function getPrefix(): string
+    {
+        return "DMDACHT";
+    }
+
+    function getSequenceName(): string
+    {
+        return "ID_DEMANDE_ACHAT_SEQ";
     }
 }

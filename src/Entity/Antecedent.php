@@ -66,7 +66,7 @@ class Antecedent extends AbstractPrefixedIdEntity
 
     function getPrefix(): string
     {
-        return "ANT";
+        return "ANTE";
     }
 
     function getSequenceName(): string

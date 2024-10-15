@@ -26,7 +26,7 @@ class Unite extends AbstractPrefixedIdEntity
 
     function getPrefix(): string
     {
-        return "UNI";
+        return "UNIT";
     }
 
     function getSequenceName(): string

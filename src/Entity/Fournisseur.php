@@ -7,6 +7,7 @@ use App\Repository\FournisseurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
 class Fournisseur extends AbstractPrefixedIdEntity
@@ -21,6 +22,10 @@ class Fournisseur extends AbstractPrefixedIdEntity
      * @var Collection<int, Antecedent>
      */
     #[ORM\ManyToMany(targetEntity: Antecedent::class, inversedBy: 'fournisseurs')]
+    #[ORM\JoinTable(
+        joinColumns: [new JoinColumn(name: "id_fournisseur")],
+        inverseJoinColumns: [new JoinColumn(name: "id_antecedent")]
+    )]
     private Collection $antecedents;
 
     public function __construct()
