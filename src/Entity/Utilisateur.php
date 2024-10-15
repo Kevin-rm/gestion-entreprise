@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'utilisateurs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Departement $departement = null;
+
+    /**
+     * @var Collection<int, DemandeAchat>
+     */
+    #[ORM\OneToMany(targetEntity: DemandeAchat::class, mappedBy: 'utilisateur')]
+    private Collection $demandeAchats;
+
+    public function __construct()
+    {
+        $this->demandeAchats = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -118,6 +131,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDepartement(?Departement $departement): static
     {
         $this->departement = $departement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DemandeAchat>
+     */
+    public function getDemandeAchats(): Collection
+    {
+        return $this->demandeAchats;
+    }
+
+    public function addDemandeAchat(DemandeAchat $demandeAchat): static
+    {
+        if (!$this->demandeAchats->contains($demandeAchat)) {
+            $this->demandeAchats->add($demandeAchat);
+            $demandeAchat->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandeAchat(DemandeAchat $demandeAchat): static
+    {
+        if ($this->demandeAchats->removeElement($demandeAchat)) {
+            // set the owning side to null (unless already changed)
+            if ($demandeAchat->getUtilisateur() === $this) {
+                $demandeAchat->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }
