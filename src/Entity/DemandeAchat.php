@@ -6,6 +6,7 @@ use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\DemandeAchatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DemandeAchatRepository::class)]
@@ -18,6 +19,9 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(name: "id_fournisseur", nullable: false)]
     private ?Fournisseur $fournisseur = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateHeure = null;
 
     /**
      * @var Collection<int, DetailsDemandeAchat>
@@ -50,6 +54,18 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     public function setFournisseur(?Fournisseur $fournisseur): static
     {
         $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    public function getDateHeure(): ?\DateTimeInterface
+    {
+        return $this->dateHeure;
+    }
+
+    public function setDateHeure(\DateTimeInterface $dateHeure): static
+    {
+        $this->dateHeure = $dateHeure;
 
         return $this;
     }

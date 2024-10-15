@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\DetailsAchatRepository;
+use App\Repository\DetailsDemandeAchatRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DetailsAchatRepository::class)]
+#[ORM\Entity(repositoryClass: DetailsDemandeAchatRepository::class)]
 class DetailsDemandeAchat extends AbstractPrefixedIdEntity
 {
     #[ORM\ManyToOne]
