@@ -72,12 +72,12 @@ class DetailsDemandeAchat extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    function getPrefix(): string
+    public function getPrefix(): string
     {
         return "DETDMDACHT";
     }
 
-    function getSequenceName(): string
+    public function getSequenceName(): string
     {
         return "ID_DETAILS_DEMANDE_ACHAT_SEQ";
     }

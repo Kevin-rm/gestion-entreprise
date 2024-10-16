@@ -24,12 +24,12 @@ class Unite extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    function getPrefix(): string
+    public function getPrefix(): string
     {
         return "UNIT";
     }
 
-    function getSequenceName(): string
+    public function getSequenceName(): string
     {
         return "ID_UNITE_SEQ";
     }

@@ -27,11 +27,11 @@ class DemandeAchat extends AbstractPrefixedIdEntity
      * @var Collection<int, DetailsDemandeAchat>
      */
     #[ORM\OneToMany(targetEntity: DetailsDemandeAchat::class, mappedBy: 'demandeAchat', orphanRemoval: true)]
-    private Collection $detailsAchats;
+    private Collection $detailsDemandeAchats;
 
     public function __construct()
     {
-        $this->detailsAchats = new ArrayCollection();
+        $this->detailsDemandeAchats = new ArrayCollection();
     }
 
     public function getUtilisateur(): ?Utilisateur
@@ -73,39 +73,39 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     /**
      * @return Collection<int, DetailsDemandeAchat>
      */
-    public function getDetailsAchats(): Collection
+    public function getDetailsDemandeAchats(): Collection
     {
-        return $this->detailsAchats;
+        return $this->detailsDemandeAchats;
     }
 
-    public function addDetailsAchat(DetailsDemandeAchat $detailsAchat): static
+    public function addDetailsDemandeAchat(DetailsDemandeAchat $detailsDemandeAchat): static
     {
-        if (!$this->detailsAchats->contains($detailsAchat)) {
-            $this->detailsAchats->add($detailsAchat);
-            $detailsAchat->setDemandeAchat($this);
+        if (!$this->detailsDemandeAchats->contains($detailsDemandeAchat)) {
+            $this->detailsDemandeAchats->add($detailsDemandeAchat);
+            $detailsDemandeAchat->setDemandeAchat($this);
         }
 
         return $this;
     }
 
-    public function removeDetailsAchat(DetailsDemandeAchat $detailsAchat): static
+    public function removeDetailsDemandeAchat(DetailsDemandeAchat $detailsDemandeAchat): static
     {
-        if ($this->detailsAchats->removeElement($detailsAchat)) {
+        if ($this->detailsDemandeAchats->removeElement($detailsDemandeAchat)) {
             // set the owning side to null (unless already changed)
-            if ($detailsAchat->getDemandeAchat() === $this) {
-                $detailsAchat->setDemandeAchat(null);
+            if ($detailsDemandeAchat->getDemandeAchat() === $this) {
+                $detailsDemandeAchat->setDemandeAchat(null);
             }
         }
 
         return $this;
     }
 
-    function getPrefix(): string
+    public function getPrefix(): string
     {
         return "DMDACHT";
     }
 
-    function getSequenceName(): string
+    public function getSequenceName(): string
     {
         return "ID_DEMANDE_ACHAT_SEQ";
     }

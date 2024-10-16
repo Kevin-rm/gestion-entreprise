@@ -156,12 +156,12 @@ class Utilisateur extends AbstractPrefixedIdEntity implements UserInterface, Pas
         return $this;
     }
 
-    function getPrefix(): string
+    public function getPrefix(): string
     {
         return "UTI";
     }
 
-    function getSequenceName(): string
+    public function getSequenceName(): string
     {
         return "ID_UTILISATEUR_SEQ";
     }

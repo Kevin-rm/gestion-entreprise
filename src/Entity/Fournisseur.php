@@ -81,12 +81,12 @@ class Fournisseur extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    function getPrefix(): string
+    public function getPrefix(): string
     {
         return "FRN";
     }
 
-    function getSequenceName(): string
+    public function getSequenceName(): string
     {
         return "ID_FOURNISSEUR_SEQ";
     }

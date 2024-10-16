@@ -64,12 +64,12 @@ class Antecedent extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    function getPrefix(): string
+    public function getPrefix(): string
     {
         return "ANTE";
     }
 
-    function getSequenceName(): string
+    public function getSequenceName(): string
     {
         return "ID_ANTECEDENT_SEQ";
     }

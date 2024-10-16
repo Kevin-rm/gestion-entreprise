@@ -67,12 +67,12 @@ class Departement extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    function getPrefix(): string
+    public function getPrefix(): string
     {
         return "DEPT";
     }
 
-    function getSequenceName(): string
+    public function getSequenceName(): string
     {
         return "ID_DEPARTEMENT_SEQ";
     }

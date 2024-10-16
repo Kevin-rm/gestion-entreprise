@@ -40,12 +40,12 @@ class Produit extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    function getPrefix(): string
+    public function getPrefix(): string
     {
         return "PROD";
     }
 
-    function getSequenceName(): string
+    public function getSequenceName(): string
     {
         return "ID_PRODUIT_SEQ";
     }
