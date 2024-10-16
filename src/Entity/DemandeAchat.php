@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\DemandeAchatRepository;
+use App\Status;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -12,6 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: DemandeAchatRepository::class)]
 class DemandeAchat extends AbstractPrefixedIdEntity
 {
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $motif = null;
+
     #[ORM\ManyToOne(inversedBy: 'demandeAchats')]
     #[ORM\JoinColumn(name: "id_utilisateur", nullable: false)]
     private ?Utilisateur $utilisateur = null;
@@ -23,6 +27,9 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateHeure = null;
 
+    #[ORM\Column(enumType: Status::class)]
+    private ?Status $status = null;
+
     /**
      * @var Collection<int, DetailsDemandeAchat>
      */
@@ -32,6 +39,18 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     public function __construct()
     {
         $this->detailsDemandeAchats = new ArrayCollection();
+    }
+
+    public function getMotif(): ?string
+    {
+        return $this->motif;
+    }
+
+    public function setMotif(string $motif): static
+    {
+        $this->motif = $motif;
+
+        return $this;
     }
 
     public function getUtilisateur(): ?Utilisateur
@@ -66,6 +85,18 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     public function setDateHeure(\DateTimeInterface $dateHeure): static
     {
         $this->dateHeure = $dateHeure;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
