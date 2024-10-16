@@ -14,6 +14,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class Utilisateur extends AbstractPrefixedIdEntity implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
@@ -42,6 +48,30 @@ class Utilisateur extends AbstractPrefixedIdEntity implements UserInterface, Pas
     public function __construct()
     {
         $this->demandeAchats = new ArrayCollection();
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
     }
 
     public function getEmail(): ?string
