@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: DemandeAchatRepository::class)]
 class DemandeAchat extends AbstractPrefixedIdEntity
 {
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $motif = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeAchats')]
