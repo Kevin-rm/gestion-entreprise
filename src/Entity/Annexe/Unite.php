@@ -1,20 +1,16 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Annexe;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\ProduitRepository;
+use App\Repository\Annexe\UniteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProduitRepository::class)]
-class Produit extends AbstractPrefixedIdEntity
+#[ORM\Entity(repositoryClass: UniteRepository::class)]
+class Unite extends AbstractPrefixedIdEntity
 {
     #[ORM\Column(length: 255)]
     private ?string $designation = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(name: "id_unite")]
-    private ?Unite $unite = null;
 
     public function getDesignation(): ?string
     {
@@ -28,25 +24,13 @@ class Produit extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    public function getUnite(): ?Unite
-    {
-        return $this->unite;
-    }
-
-    public function setUnite(?Unite $unite): static
-    {
-        $this->unite = $unite;
-
-        return $this;
-    }
-
     public function getPrefix(): string
     {
-        return "PROD";
+        return "UNIT";
     }
 
     public function getSequenceName(): string
     {
-        return "ID_PRODUIT_SEQ";
+        return "ID_UNITE_SEQ";
     }
 }

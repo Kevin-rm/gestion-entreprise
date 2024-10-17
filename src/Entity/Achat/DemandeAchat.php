@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Achat;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\DemandeAchatRepository;
-use App\Status;
+use App\Entity\Tiers\Fournisseur;
+use App\Entity\Tiers\Tiers;
+use App\Entity\Utilisateur;
+use App\Enum\StatusValidation;
+use App\Repository\Achat\DemandeAchatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -21,14 +24,14 @@ class DemandeAchat extends AbstractPrefixedIdEntity
     private ?Utilisateur $utilisateur = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(name: "id_fournisseur", nullable: false)]
-    private ?Fournisseur $fournisseur = null;
+    #[ORM\JoinColumn(name: "fournisseur", nullable: false)]
+    private ?Tiers $fournisseur = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateHeure = null;
 
-    #[ORM\Column(enumType: Status::class)]
-    private ?Status $status = null;
+    #[ORM\Column(enumType: StatusValidation::class)]
+    private ?StatusValidation $statusValidation = null;
 
     /**
      * @var Collection<int, DetailsDemandeAchat>
@@ -65,12 +68,12 @@ class DemandeAchat extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    public function getFournisseur(): ?Fournisseur
+    public function getFournisseur(): ?Tiers
     {
         return $this->fournisseur;
     }
 
-    public function setFournisseur(?Fournisseur $fournisseur): static
+    public function setFournisseur(?Tiers $fournisseur): static
     {
         $this->fournisseur = $fournisseur;
 
@@ -89,14 +92,14 @@ class DemandeAchat extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    public function getStatus(): ?Status
+    public function getStatusValidation(): ?StatusValidation
     {
-        return $this->status;
+        return $this->statusValidation;
     }
 
-    public function setStatus(Status $status): static
+    public function setStatusValidation(StatusValidation $statusValidation): static
     {
-        $this->status = $status;
+        $this->statusValidation = $statusValidation;
 
         return $this;
     }

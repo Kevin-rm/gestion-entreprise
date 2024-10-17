@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Achat;
 
+use App\Entity\Annexe\Produit;
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\DetailsDemandeAchatRepository;
+use App\Repository\Achat\DetailsDemandeAchatRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

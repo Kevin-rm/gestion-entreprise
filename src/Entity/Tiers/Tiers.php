@@ -1,30 +1,34 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Tiers;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\FournisseurRepository;
+use App\Enum\TypeTiers;
+use App\Repository\Tiers\TiersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 
-#[ORM\Entity(repositoryClass: FournisseurRepository::class)]
-class Fournisseur extends AbstractPrefixedIdEntity
+#[ORM\Entity(repositoryClass: TiersRepository::class)]
+class Tiers extends AbstractPrefixedIdEntity
 {
     #[ORM\Column(length: 255)]
-    private ?string $nomEntreprise = null;
+    private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
+    #[ORM\Column(enumType: TypeTiers::class)]
+    private ?TypeTiers $type = null;
+
     /**
      * @var Collection<int, Antecedent>
      */
-    #[ORM\ManyToMany(targetEntity: Antecedent::class, inversedBy: 'fournisseurs')]
+    #[ORM\ManyToMany(targetEntity: Antecedent::class, inversedBy: 'tiers')]
     #[ORM\JoinTable(
-        joinColumns: [new JoinColumn(name: "id_fournisseur")],
-        inverseJoinColumns: [new JoinColumn(name: "id_antecedent")]
+        joinColumns:        new JoinColumn(name: "id_tiers"),
+        inverseJoinColumns: new JoinColumn(name: "id_antecedent")
     )]
     private Collection $antecedents;
 
@@ -33,14 +37,14 @@ class Fournisseur extends AbstractPrefixedIdEntity
         $this->antecedents = new ArrayCollection();
     }
 
-    public function getNomEntreprise(): ?string
+    public function getNom(): ?string
     {
-        return $this->nomEntreprise;
+        return $this->nom;
     }
 
-    public function setNomEntreprise(string $nomEntreprise): static
+    public function setNom(string $nom): static
     {
-        $this->nomEntreprise = $nomEntreprise;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -50,9 +54,21 @@ class Fournisseur extends AbstractPrefixedIdEntity
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getType(): ?TypeTiers
+    {
+        return $this->type;
+    }
+
+    public function setType(TypeTiers $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -83,11 +99,11 @@ class Fournisseur extends AbstractPrefixedIdEntity
 
     public function getPrefix(): string
     {
-        return "FRN";
+        return "TIERS";
     }
 
     public function getSequenceName(): string
     {
-        return "ID_FOURNISSEUR_SEQ";
+        return "ID_TIERS_SEQ";
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\ControleInterne;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\ChaineApprobationRepository;
+use App\Repository\ControleInterne\ChaineApprobationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

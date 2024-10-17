@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Enum;
 
-enum Status: string
+enum StatusValidation: string
 {
     case APPROUVEE = "Approuvée";
     case REJETEE   = "Rejetée";

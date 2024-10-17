@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Achat;
 
-use App\Entity\DemandeAchat;
+use App\Entity\Achat\DetailsDemandeAchat;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<DemandeAchat>
+ * @extends ServiceEntityRepository<DetailsDemandeAchat>
  */
-class DemandeAchatRepository extends ServiceEntityRepository
+class DetailsDemandeAchatRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, DemandeAchat::class);
+        parent::__construct($registry, DetailsDemandeAchat::class);
     }
 
 //    /**
-//     * @return DemandeAchat[] Returns an array of DemandeAchat objects
+//     * @return DetailsDemandeAchat[] Returns an array of DetailsDemandeAchat objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -31,7 +31,7 @@ class DemandeAchatRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?DemandeAchat
+//    public function findOneBySomeField($value): ?DetailsDemandeAchat
 //    {
 //        return $this->createQueryBuilder('d')
 //            ->andWhere('d.exampleField = :val')

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\ControleInterne;
 
-use App\Entity\ChaineApprobation;
+use App\Entity\ControleInterne\ChaineApprobation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

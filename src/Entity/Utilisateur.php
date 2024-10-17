@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Achat\DemandeAchat;
 use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;

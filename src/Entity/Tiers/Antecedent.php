@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Tiers;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\AntecedentRepository;
+use App\Repository\Tiers\AntecedentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,14 +15,14 @@ class Antecedent extends AbstractPrefixedIdEntity
     private ?string $libelle = null;
 
     /**
-     * @var Collection<int, Fournisseur>
+     * @var Collection<int, Tiers>
      */
-    #[ORM\ManyToMany(targetEntity: Fournisseur::class, mappedBy: 'antecedents')]
-    private Collection $fournisseurs;
+    #[ORM\ManyToMany(targetEntity: Tiers::class, mappedBy: 'antecedents')]
+    private Collection $tiers;
 
     public function __construct()
     {
-        $this->fournisseurs = new ArrayCollection();
+        $this->tiers = new ArrayCollection();
     }
 
     public function getLibelle(): ?string
@@ -38,27 +38,27 @@ class Antecedent extends AbstractPrefixedIdEntity
     }
 
     /**
-     * @return Collection<int, Fournisseur>
+     * @return Collection<int, Tiers>
      */
-    public function getFournisseurs(): Collection
+    public function getTiers(): Collection
     {
-        return $this->fournisseurs;
+        return $this->tiers;
     }
 
-    public function addFournisseur(Fournisseur $fournisseur): static
+    public function addTiers(Tiers $tiers): static
     {
-        if (!$this->fournisseurs->contains($fournisseur)) {
-            $this->fournisseurs->add($fournisseur);
-            $fournisseur->addAntecedent($this);
+        if (!$this->tiers->contains($tiers)) {
+            $this->tiers->add($tiers);
+            $tiers->addAntecedent($this);
         }
 
         return $this;
     }
 
-    public function removeFournisseur(Fournisseur $fournisseur): static
+    public function removeTiers(Tiers $tiers): static
     {
-        if ($this->fournisseurs->removeElement($fournisseur)) {
-            $fournisseur->removeAntecedent($this);
+        if ($this->tiers->removeElement($tiers)) {
+            $tiers->removeAntecedent($this);
         }
 
         return $this;

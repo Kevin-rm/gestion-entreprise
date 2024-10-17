@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\ControleInterne;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\NiveauValidationRepository;
+use App\Entity\Utilisateur;
+use App\Repository\ControleInterne\NiveauValidationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
