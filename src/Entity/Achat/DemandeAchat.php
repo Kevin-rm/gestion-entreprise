@@ -3,7 +3,6 @@
 namespace App\Entity\Achat;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Entity\Tiers\Fournisseur;
 use App\Entity\Tiers\Tiers;
 use App\Entity\Utilisateur;
 use App\Enum\StatusValidation;
