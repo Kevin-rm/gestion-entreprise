@@ -36,6 +36,8 @@ class ServiceDetail
             case 'FIFO':
             default:
                 return $this->calculerValeurStockFIFO($mouvements);
+            case 'CNUP':
+                return $this->calculerValeurStockCnup($mouvements);
         }
     }
 
@@ -47,9 +49,19 @@ class ServiceDetail
      */
     private function getMouvementsStockByProduit(Produit $produit): array
     {
-        return $this->em->getRepository(MouvementStock::class)
-            ->findBy(['produit' => $produit], ['dateHeur' => 'ASC']);
+        // Utilisation de QueryBuilder pour faire une jointure avec les détails des mouvements
+        $qb = $this->em->createQueryBuilder();
+
+        return $qb->select('mouvement', 'detail')
+            ->from(MouvementStock::class, 'mouvement')
+            ->leftJoin('mouvement.detailsMouvementStock', 'detail')
+            ->where('mouvement.produit = :produit')
+            ->setParameter('produit', $produit)
+            ->orderBy('mouvement.dateHeur', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
+
 
     /**
      * Calcule la valeur du stock selon la méthode FIFO (First In, First Out).
@@ -62,8 +74,7 @@ class ServiceDetail
         $valeurTotale = 0.0;
 
         foreach ($mouvements as $mouvement) {
-            $detailsMouvements = $this->em->getRepository(DetailsMouvementStock::class)
-                ->findBy(['mouvementStock' => $mouvement]);
+            $detailsMouvements = $mouvement->getDetailsMouvementStock();
 
             foreach ($detailsMouvements as $detail) {
                 $typeMouvement = $mouvement->getTypeMouvementStock();
@@ -87,27 +98,59 @@ class ServiceDetail
     private function calculerValeurStockLIFO(array $mouvements): float
     {
         $valeurTotale = 0.0;
-        $quantiteEnStock = 0;
 
-        // Inverser les mouvements pour appliquer LIFO
+        // Inverser les mouvements pour traiter les derniers en premier (LIFO)
         $mouvements = array_reverse($mouvements);
 
         foreach ($mouvements as $mouvement) {
-            $detailsMouvements = $this->em->getRepository(DetailsMouvementStock::class)
-                ->findBy(['mouvementStock' => $mouvement]);
+            // Récupérer les détails du mouvement
+            $detailsMouvements = $mouvement->getDetailsMouvementStock();
 
             foreach ($detailsMouvements as $detail) {
                 $typeMouvement = $mouvement->getTypeMouvementStock();
-                
+
                 if ($typeMouvement === TypeMouvementStock::ENTREE) {
-                    $quantiteEnStock += $detail->getQuantite();
                     $valeurTotale += $detail->getQuantite() * $detail->getPrixUnitaire();
                 } elseif ($typeMouvement === TypeMouvementStock::SORTIE) {
-                    $quantiteEnStock -= $detail->getQuantite();
+                    $valeurTotale -= $detail->getQuantite() * $detail->getPrixUnitaire();
                 }
             }
         }
 
-        return $quantiteEnStock > 0 ? $valeurTotale / $quantiteEnStock : 0;
+        return $valeurTotale;
     }
+
+    /**
+     * Calcule la valeur de stock en utilisant le Coût Normalisé Unitaire de Production (CNUP).
+     *
+     * @param Produit $produit
+     * @return float
+     */
+    private function calculerValeurStockCnup(array $mouvements): float
+    {
+        $totalEntrees = 0.0;
+        $quantiteDisponible = 0;
+
+        foreach ($mouvements as $mouvement) {
+            // Récupérer les détails des mouvements de stock
+            $detailsMouvements = $mouvement->getDetailsMouvementStock();
+            $typeMouvement = $mouvement->getTypeMouvementStock();
+
+            foreach ($detailsMouvements as $detail) {
+                if ($typeMouvement === TypeMouvementStock::ENTREE) {
+                    $totalEntrees += $detail->getQuantite() * $detail->getPrixUnitaire();
+                    $quantiteDisponible += $detail->getQuantite();
+                } elseif ($typeMouvement === TypeMouvementStock::SORTIE) {
+                    $quantiteDisponible -= $detail->getQuantite();
+                }
+            }
+        }
+
+        // Calculer la valeur de stock en utilisant le CNUP
+        $cnup = $quantiteDisponible > 0 ? $totalEntrees / $quantiteDisponible : 0;
+
+        // Valeur de stock totale
+        return $quantiteDisponible * $cnup;
+    }
+
 }
