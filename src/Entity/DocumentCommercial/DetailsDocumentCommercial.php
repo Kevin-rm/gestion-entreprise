@@ -21,7 +21,7 @@ class DetailsDocumentCommercial extends AbstractPrefixedIdEntity
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $prixUnitaire = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
     private ?string $tva = null;
 
     #[ORM\ManyToOne(inversedBy: 'details')]
