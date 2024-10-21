@@ -9,6 +9,7 @@ use App\Enum\TypeMouvementStock;
 
 use Doctrine\ORM\EntityManagerInterface;
 
+
 class ServiceDetailStock
 {
     private EntityManagerInterface $em;
@@ -55,12 +56,13 @@ class ServiceDetailStock
         return $qb->select('mouvement', 'detail')
             ->from(MouvementStock::class, 'mouvement')
             ->leftJoin('mouvement.detailsMouvementStock', 'detail')
-            ->where('mouvement.produit = :produit')
+            ->where('detail.produit = :produit')
             ->setParameter('produit', $produit)
-            ->orderBy('mouvement.dateHeur', 'ASC')
+            ->orderBy('mouvement.dateHeure', 'ASC')  
             ->getQuery()
             ->getResult();
     }
+
 
 
     /**
