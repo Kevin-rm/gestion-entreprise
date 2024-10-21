@@ -4,6 +4,7 @@ namespace App\Entity\Stock;
 
 use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\Stock\MouvementStockRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,17 +14,17 @@ use App\Enum\TypeMouvementStock;
 class MouvementStock extends AbstractPrefixedIdEntity
 {
     #[ORM\Column(enumType: TypeMouvementStock::class)]
-    private ?TypeMouvementStock $typeMouvementStock = null; 
+    private ?TypeMouvementStock $typeMouvementStock = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private \DateTimeInterface $dateHeur;
+    private ?\DateTimeInterface $dateHeure = null;
 
-    #[ORM\OneToMany(mappedBy: 'mouvementStock', targetEntity: DetailsMouvementStock::class, cascade: ['persist'])]
-    private Collection $detailsMouvementStock;
+    #[ORM\OneToMany(targetEntity: DetailsMouvementStock::class, mappedBy: 'mouvementStock', cascade: ['persist'])]
+    private Collection $details;
 
     public function __construct()
     {
-        $this->detailsMouvementStock = new ArrayCollection();
+        $this->details = new ArrayCollection();
     }
 
     public function getTypeMouvementStock(): TypeMouvementStock
@@ -38,14 +39,14 @@ class MouvementStock extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    public function getDateHeur(): \DateTimeInterface
+    public function getDateHeure(): \DateTimeInterface
     {
-        return $this->dateHeur;
+        return $this->dateHeure;
     }
 
-    public function setDateHeur(\DateTimeInterface $dateHeur): static
+    public function setDateHeure(\DateTimeInterface $dateHeure): static
     {
-        $this->dateHeur = $dateHeur;
+        $this->dateHeure = $dateHeure;
 
         return $this;
     }
@@ -53,24 +54,24 @@ class MouvementStock extends AbstractPrefixedIdEntity
     /**
      * @return Collection<int, DetailsMouvementStock>
      */
-    public function getDetailsMouvementStock(): Collection
+    public function getDetails(): Collection
     {
-        return $this->detailsMouvementStock;
+        return $this->details;
     }
 
-    public function addDetailsMouvementStock(DetailsMouvementStock $detailsMouvementStock): static
+    public function addDetails(DetailsMouvementStock $detailsMouvementStock): static
     {
-        if (!$this->detailsMouvementStock->contains($detailsMouvementStock)) {
-            $this->detailsMouvementStock[] = $detailsMouvementStock;
+        if (!$this->details->contains($detailsMouvementStock)) {
+            $this->details[] = $detailsMouvementStock;
             $detailsMouvementStock->setMouvementStock($this);
         }
 
         return $this;
     }
 
-    public function removeDetailsMouvementStock(DetailsMouvementStock $detailsMouvementStock): static
+    public function removeDetails(DetailsMouvementStock $detailsMouvementStock): static
     {
-        if ($this->detailsMouvementStock->removeElement($detailsMouvementStock)) {
+        if ($this->details->removeElement($detailsMouvementStock)) {
             if ($detailsMouvementStock->getMouvementStock() === $this) {
                 $detailsMouvementStock->setMouvementStock(null);
             }
@@ -89,4 +90,3 @@ class MouvementStock extends AbstractPrefixedIdEntity
         return "ID_MOUVEMENT_STOCK_SEQ";
     }
 }
-

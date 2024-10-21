@@ -74,14 +74,14 @@ class ServiceDetailStock
         $valeurTotale = 0.0;
 
         foreach ($mouvements as $mouvement) {
-            $detailsMouvements = $mouvement->getDetailsMouvementStock();
+            $detailsMouvements = $mouvement->getDetails();
 
             foreach ($detailsMouvements as $detail) {
                 $typeMouvement = $mouvement->getTypeMouvementStock();
                 
-                if ($typeMouvement === TypeMouvementStock::ENTREE) {
+                if ($typeMouvement === TypeMouvementStock::ENTRE) {
                     $valeurTotale += $detail->getQuantite() * $detail->getPrixUnitaire();
-                } elseif ($typeMouvement === TypeMouvementStock::SORTIE) {
+                } elseif ($typeMouvement === TypeMouvementStock::SORTI) {
                     $valeurTotale -= $detail->getQuantite() * $detail->getPrixUnitaire();
                 }
             }
@@ -104,14 +104,14 @@ class ServiceDetailStock
 
         foreach ($mouvements as $mouvement) {
             // Récupérer les détails du mouvement
-            $detailsMouvements = $mouvement->getDetailsMouvementStock();
+            $detailsMouvements = $mouvement->getDetails();
 
             foreach ($detailsMouvements as $detail) {
                 $typeMouvement = $mouvement->getTypeMouvementStock();
 
-                if ($typeMouvement === TypeMouvementStock::ENTREE) {
+                if ($typeMouvement === TypeMouvementStock::ENTRE) {
                     $valeurTotale += $detail->getQuantite() * $detail->getPrixUnitaire();
-                } elseif ($typeMouvement === TypeMouvementStock::SORTIE) {
+                } elseif ($typeMouvement === TypeMouvementStock::SORTI) {
                     $valeurTotale -= $detail->getQuantite() * $detail->getPrixUnitaire();
                 }
             }
@@ -137,10 +137,10 @@ class ServiceDetailStock
             $typeMouvement = $mouvement->getTypeMouvementStock();
 
             foreach ($detailsMouvements as $detail) {
-                if ($typeMouvement === TypeMouvementStock::ENTREE) {
+                if ($typeMouvement === TypeMouvementStock::ENTRE) {
                     $totalEntrees += $detail->getQuantite() * $detail->getPrixUnitaire();
                     $quantiteDisponible += $detail->getQuantite();
-                } elseif ($typeMouvement === TypeMouvementStock::SORTIE) {
+                } elseif ($typeMouvement === TypeMouvementStock::SORTI) {
                     $quantiteDisponible -= $detail->getQuantite();
                 }
             }

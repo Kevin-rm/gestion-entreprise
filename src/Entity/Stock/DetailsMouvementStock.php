@@ -6,38 +6,21 @@ use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Entity\Annexe\Produit;
 use App\Repository\Stock\DetailsMouvementStockRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity(repositoryClass: DetailsMouvementStockRepository::class)]
 class DetailsMouvementStock extends AbstractPrefixedIdEntity
 {
-    
-    #[ORM\ManyToOne(targetEntity: MouvementStock::class, inversedBy: 'detailsMouvementStock')]
-    private ?MouvementStock $mouvementStock = null;
-
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "id_produit", nullable: false)]
     private ?Produit $produit = null;
 
-    #[ORM\Column(type: 'integer')]
-    private int $quantite;
+    #[ORM\Column]
+    private ?float $quantite = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private float $prixUnitaire;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private \DateTimeInterface $dateHeur;
-
-    public function getMouvementStock(): ?MouvementStock
-    {
-        return $this->mouvementStock;
-    }
-
-    public function setMouvementStock(?MouvementStock $mouvementStock): static
-    {
-        $this->mouvementStock = $mouvementStock;
-
-        return $this;
-    }
+    #[ORM\ManyToOne(targetEntity: MouvementStock::class, inversedBy: 'detailsMouvementStock')]
+    #[JoinColumn(name: "id_mouvement", nullable: false)]
+    private ?MouvementStock $mouvementStock = null;
 
     public function getProduit(): ?Produit
     {
@@ -51,45 +34,33 @@ class DetailsMouvementStock extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    public function getQuantite(): int
+    public function getQuantite(): ?float
     {
         return $this->quantite;
     }
 
-    public function setQuantite(int $quantite): static
+    public function setQuantite(float $quantite): static
     {
         $this->quantite = $quantite;
 
         return $this;
     }
 
-    public function getPrixUnitaire(): float
+    public function getMouvementStock(): ?MouvementStock
     {
-        return $this->prixUnitaire;
+        return $this->mouvementStock;
     }
 
-    public function setPrixUnitaire(float $prixUnitaire): static
+    public function setMouvementStock(?MouvementStock $mouvementStock): static
     {
-        $this->prixUnitaire = $prixUnitaire;
-
-        return $this;
-    }
-
-    public function getDateHeur(): \DateTimeInterface
-    {
-        return $this->dateHeur;
-    }
-
-    public function setDateHeur(\DateTimeInterface $dateMouvement): static
-    {
-        $this->dateHeur = $dateMouvement;
+        $this->mouvementStock = $mouvementStock;
 
         return $this;
     }
 
     public function getPrefix(): string
     {
-        return "DETDMVTSTK";
+        return "DETMVTSTK";
     }
 
     public function getSequenceName(): string
@@ -97,5 +68,3 @@ class DetailsMouvementStock extends AbstractPrefixedIdEntity
         return "ID_DETAILS_MOUVEMENT_STOCK_SEQ";
     }
 }
-
-
