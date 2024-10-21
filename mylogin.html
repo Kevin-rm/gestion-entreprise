@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MyApp</title>
+    <style>
+        body {
+            background-color: #F7F7F7;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login_wrapper {
+            max-width: 400px;
+            width: 100%;
+            padding: 30px;
+            background: #FFF;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .login_wrapper h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login_wrapper label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            font-size: 14px;
+            color: #333;
+        }
+        .login_wrapper input[type="text"],
+        .login_wrapper input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .login_wrapper .submit {
+            width: 100%;
+            background-color: #6571ff;
+            color: #FFF;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login_wrapper .submit:hover {
+            background-color: #505ac9;
+        }
+        .login_wrapper .reset_pass,
+        .login_wrapper .change_link {
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #6571ff;
+        }
+        .login_wrapper .change_link a {
+            color: #6571ff;
+            text-decoration: none;
+        }
+        .login_wrapper .separator {
+            border-top: 1px solid #E6E9ED;
+            margin-top: 20px;
+            padding-top: 20px;
+            text-align: center;
+        }
+        .login_wrapper .separator p {
+            font-size: 12px;
+            color: #999;
+        }
+        @media (max-width: 480px) {
+            .login_wrapper {
+                padding: 20px;
+                margin: 20px;
+            }
+            .login_wrapper h1 {
+                font-size: 20px;
+            }
+            .login_wrapper .submit {
+                font-size: 14px;
+            }
+        }
+        span {
+            color: darkred;
+            font-size: small;
+        }
+
+        .champs {
+            margin-bottom: 10px;
+        }
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo svg {
+            width: 120px;
+            height: auto;
+        }
+        .logo h2 {
+            font-size: 24px;
+            color: #474087;
+            margin-top: 10px;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login_wrapper">
+        <section class="login_content">
+            <form action="" method="post">
+                <div class="logo">
+                    <!-- Enhanced Business Management Logo SVG -->
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Building Bars -->
+                        <rect x="10" y="30" width="12" height="60" fill="#474087" rx="2" />
+                        <rect x="30" y="20" width="12" height="70" fill="#4A549D" rx="2" />
+                        <rect x="50" y="10" width="12" height="80" fill="#4D57B3" rx="2" />
+                        <rect x="70" y="40" width="12" height="50" fill="#505AC9" rx="2" />
+                        
+                        <!-- Arrows for Growth -->
+                        <path d="M5 45 L20 30 L35 45" stroke="#FF6F61" stroke-width="2" fill="none" />
+                        <path d="M25 35 L40 20 L55 35" stroke="#FF6F61" stroke-width="2" fill="none" />
+                        <path d="M45 25 L60 10 L75 25" stroke="#FF6F61" stroke-width="2" fill="none" />
+
+                        <!-- Background Circle -->
+                        <circle cx="50" cy="50" r="45" stroke="#E6E9ED" stroke-width="2" fill="none" />
+                    </svg>
+                    <!-- Site Name -->
+                    <h2>MyApp</h2>
+                </div>
+                <div class="champs">
+                    <label for="username">Email :</label>
+                    <input type="text" id="username" placeholder="example@gmail.com" name="identifiant"/>
+                    <span>Email invalide</span>
+                </div>
+                <div class="champs">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" placeholder="1234mdp" name="mdp" />
+                    <span>Mot de passe incorrect</span>
+                </div>
+                <div>
+                    <button class="submit" type="submit">Se connecter</button>
+                </div>
+                <div class="separator">
+                    <div>
+                        <p>©2024 Groupe , Tous droits réservés.</p>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
