@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!--
+Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
+Author: NobleUI
+Website: https://www.nobleui.com
+Portfolio: https://themeforest.net/user/nobleui/portfolio
+Contact: nobleui123@gmail.com
+Purchase: https://1.envato.market/nobleui_admin
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="NobleUI">
+	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<title>MyApp</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="assets/vendors/core/core.css">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="assets/fonts/feather-font/css/iconfont.css">
+	<link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+	<link rel="stylesheet" href="assets/css/demo1/style.css">
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="assets/images/favicon.png" />
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="sidebar-brand">
+          My<span>App</span>
+        </a>
+        <div class="sidebar-toggler not-active">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="sidebar-body">
+        <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#demande" role="button" aria-expanded="false" aria-controls="demande">
+                <i class="link-icon" data-feather="git-branch"></i>
+                <span class="link-title">Demande</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+              </a>
+              <div class="collapse" id="demande">
+                <ul class="nav sub-menu">
+                  <li class="nav-item">
+                    <a href="demande_insertion.html" class="nav-link">Insertion</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="demande_liste.html" class="nav-link">Liste</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="demande_validation.html" class="nav-link">Validation</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#articles" role="button" aria-expanded="false" aria-controls="articles">
+                <i class="link-icon" data-feather="inbox"></i>
+                <span class="link-title">Produit</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+              </a>
+              <div class="collapse" id="articles">
+                <ul class="nav sub-menu">
+                  <li class="nav-item">
+                    <a href="produit_insertion.html" class="nav-link">Insertion</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="produit_liste.html" class="nav-link">Liste</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#tiers" role="button" aria-expanded="false" aria-controls="tiers">
+                <i class="link-icon" data-feather="package"></i>
+                <span class="link-title">Tiers</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+              </a>
+              <div class="collapse" id="tiers">
+                <ul class="nav sub-menu">
+                  <li class="nav-item">
+                    <a href="tiers_insertion.html" class="nav-link">Insertion</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="tiers_liste.html" class="nav-link">Liste</a>
+                  </li>
+
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#achat" role="button" aria-expanded="false" aria-controls="achat">
+                <i class="link-icon" data-feather="shopping-cart"></i>
+                <span class="link-title">Achat</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+              </a>
+              <div class="collapse" id="achat">
+                <ul class="nav sub-menu">
+                  <li class="nav-item">
+                      <a href="achat_bonCommande_liste.html" class="nav-link">Liste commande</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="achat_bonReception_list.html" class="nav-link">Liste reception</a>
+                </li>
+                  <li class="nav-item">
+                    <a href="achat_bonReception.html" class="nav-link">Bon de reception</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="achat_bonCommande.html" class="nav-link">Bon de commande</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#vente" role="button" aria-expanded="false" aria-controls="vente">
+                <i class="link-icon" data-feather="shopping-bag"></i>
+                <span class="link-title">Vente</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+              </a>
+              <div class="collapse" id="vente">
+                <ul class="nav sub-menu">
+                  <li class="nav-item">
+                    <a href="vente_bonLivraison_list.html" class="nav-link">Liste livraison</a>
+                </li>
+                <li class="nav-item">
+                  <a href="vente_bonReception_list.html" class="nav-link">Liste reception</a>
+              </li>
+                  <li class="nav-item">
+                    <a href="vente_bonReception.html" class="nav-link">Bon de reception</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="vente_bonLivraison.html" class="nav-link">Bon de livraison</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#stock" role="button" aria-expanded="false" aria-controls="stock">
+                <i class="link-icon" data-feather="database"></i>
+                <span class="link-title">Stock</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+              </a>
+              <div class="collapse" id="stock">
+                <ul class="nav sub-menu">
+                  <li class="nav-item">
+                      <a href="etat_stock.html" class="nav-link">Etat</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+      </div>
+    </nav>
+    <nav class="settings-sidebar">
+      <div class="sidebar-body">
+        <a href="#" class="settings-sidebar-toggler">
+          <i data-feather="settings"></i>
+        </a>
+        <h6 class="text-muted mb-2">Sidebar:</h6>
+        <div class="mb-3 pb-3 border-bottom">
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="sidebarThemeSettings" id="sidebarLight" value="sidebar-light" checked>
+            <label class="form-check-label" for="sidebarLight">
+              Light
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="sidebarThemeSettings" id="sidebarDark" value="sidebar-dark">
+            <label class="form-check-label" for="sidebarDark">
+              Dark
+            </label>
+          </div>
+        </div>
+        <div class="theme-wrapper">
+          <h6 class="text-muted mb-2">Light Theme:</h6>
+          <a class="theme-item active" href="demo1/dashboard.html">
+            <img src="assets/images/screenshots/light.jpg" alt="light theme">
+          </a>
+          <h6 class="text-muted mb-2">Dark Theme:</h6>
+          <a class="theme-item" href="demo2/dashboard.html">
+            <img src="assets/images/screenshots/dark.jpg" alt="light theme">
+          </a>
+        </div>
+      </div>
+    </nav>
+   
+		<!-- partial -->
+	
+		<div class="page-wrapper">
+					
+			<!-- partial:partials/_navbar.html -->
+			<nav class="navbar">
+				<a href="#" class="sidebar-toggler">
+					<i data-feather="menu"></i>
+				</a>
+				<div class="navbar-content" style="padding-right: 10px;">
+					<form class="search-form">
+						<div class="input-group">
+                            <div class="input-group-text">
+                                <i data-feather="search"></i>
+                            </div>
+							<input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
+						</div>
+					</form>
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="profile">
+                                <span style="margin-left: 5px;">Randrianirina Joann</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+							</a>
+							<div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
+								<div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
+									<div class="mb-3">
+										<img class="wd-80 ht-80 rounded-circle" src="https://via.placeholder.com/80x80" alt="">
+									</div>
+									<div class="text-center">
+										<p class="tx-16 fw-bolder">Randrianirina Joann</p>
+										<p class="tx-12 text-muted">joannrandrianirina@gmail.com</p>
+									</div>
+								</div>
+                <ul class="list-unstyled p-1">
+                  <li class="dropdown-item py-2">
+                    <a href="pages/general/profile.html" class="text-body ms-0">
+                      <i class="me-2 icon-md" data-feather="user"></i>
+                      <span>Profile</span>
+                    </a>
+                  </li>
+                  <li class="dropdown-item py-2">
+                    <a href="javascript:;" class="text-body ms-0">
+                      <i class="me-2 icon-md" data-feather="edit"></i>
+                      <span>Edit Profile</span>
+                    </a>
+                  </li>
+                  <li class="dropdown-item py-2">
+                    <a href="javascript:;" class="text-body ms-0">
+                      <i class="me-2 icon-md" data-feather="log-out"></i>
+                      <span>Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- partial -->
+      <div class="page-content">
+
+				<nav class="page-breadcrumb" style="display: flex; align-items: center; justify-content: space-between;">
+          <a href="achat_bonReception.html">
+            <button type="button" class="btn btn-inverse-primary btn-icon-text">
+              <i class="btn-icon-prepend" data-feather="plus"></i>
+              Ajouter
+            </button>
+          </a>
+          
+          <ol class="breadcrumb" style="margin: 0;">
+            <li class="breadcrumb-item"><a href="#">Achat</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste de Bon de reception</li>
+          </ol>
+        </nav>        
+
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+								<h6 class="card-title">Liste des Bon de reception</h6>
+								<div class="table-responsive">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Produits</th>
+													<th>Quantite</th>
+                                                    <th>Date</th>
+                    
+                          
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+                          
+                          <td><a href="achat_detail.html">1</a></td>
+                          <td>imprimante</td>
+													<td>14</td>
+                                                    <td>14/04/2024</td>
+						
+													<td style="padding-top: 0;padding-bottom: 0; vertical-align: middle;">                          
+                            <button type="button" class="btn btn-inverse-secondary btn-icon-text">
+                              <i class="btn-icon-prepend" data-feather="file"></i>
+                              PDF
+                            </button>
+                          </td>                          
+												</tr>
+											
+											</tbody>
+										</table>
+								</div>
+              </div>
+            </div>
+					</div>
+				</div>
+			</div>
+			<!-- partial:partials/_footer.html -->
+			<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+				<p class="text-muted mb-1 mb-md-0">ETU : 2585 - 2711 - 2389</p>
+				<p class="text-muted"> Copyright © 2024 Group , Tout droits reservé <i class="mb-1 text-primary ms-1 icon-sm" data-feather="users"></i></p>
+			</footer>
+			<!-- partial -->
+		
+		</div>
+	</div>
+
+	<!-- core:js -->
+	<script src="assets/vendors/core/core.js"></script>
+	<!-- endinject -->
+
+	<!-- Plugin js for this page -->
+  <script src="assets/vendors/chartjs/Chart.min.js"></script>
+  <script src="assets/vendors/jquery.flot/jquery.flot.js"></script>
+  <script src="assets/vendors/jquery.flot/jquery.flot.resize.js"></script>
+  <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
+	<!-- End plugin js for this page -->
+
+	<!-- inject:js -->
+	<script src="assets/vendors/feather-icons/feather.min.js"></script>
+	<script src="assets/js/template.js"></script>
+	<!-- endinject -->
+
+	<!-- Custom js for this page -->
+  <script src="assets/js/dashboard-light.js"></script>
+  <script src="assets/js/datepicker.js"></script>
+	<!-- End custom js for this page -->
+
+</body>
+</html>    
