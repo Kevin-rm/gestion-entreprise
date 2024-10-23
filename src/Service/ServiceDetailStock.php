@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Stock\MouvementStock;
-use App\Entity\Stock\DetailsMouvementStock;
 use App\Entity\Annexe\Produit;
 use App\Enum\TypeMouvementStock;
 
