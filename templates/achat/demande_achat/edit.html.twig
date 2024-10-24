@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit DemandeAchat{% endblock %}
+
+{% block body %}
+    <h1>Edit DemandeAchat</h1>
+
+    {{ include('achat/demande_achat/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_achat_demande_achat_index') }}">back to list</a>
+
+    {{ include('achat/demande_achat/_delete_form.html.twig') }}
+{% endblock %}

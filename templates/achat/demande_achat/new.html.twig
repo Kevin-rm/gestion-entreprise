@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DemandeAchat{% endblock %}
+
+{% block body %}
+    <h1>Create new DemandeAchat</h1>
+
+    {{ include('achat/demande_achat/_form.html.twig') }}
+
+    <a href="{{ path('app_achat_demande_achat_index') }}">back to list</a>
+{% endblock %}
