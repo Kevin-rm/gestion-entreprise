@@ -8,7 +8,7 @@ use App\Enum\TypeMouvementStock;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-class ServiceDetailStock
+class MouvementStockService
 {
     private EntityManagerInterface $em;
 

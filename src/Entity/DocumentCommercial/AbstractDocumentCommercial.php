@@ -26,6 +26,18 @@ abstract class AbstractDocumentCommercial extends AbstractPrefixedIdEntity
         $this->details = new ArrayCollection();
     }
 
+    public function getDateHeure(): ?DateTimeInterface
+    {
+        return $this->dateHeure;
+    }
+
+    public function setDateHeure(?DateTimeInterface $dateHeure): static
+    {
+        $this->dateHeure = $dateHeure;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, DetailsDocumentCommercial>
      */
