@@ -18,14 +18,18 @@
                     {{ form_start(form) }}
 
                     <div class="mb-3">
-                        {{ form_label(form.motif) }}
-                        {{ form_widget(form.motif) }}
-                        {{ form_errors(form.motif) }}
+                        {{ form_row(form.motif) }}
                     </div>
                     <div class="mb-3">
-                        {{ form_label(form.fournisseur) }}
-                        {{ form_widget(form.fournisseur) }}
-                        {{ form_errors(form.fournisseur) }}
+                        {{ form_row(form.fournisseur) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Détails de la demande d'achat</label>
+                        <div id="details_collection_wrapper">
+                            {{ form_widget(form.detailsDemandeAchats) }}
+                        </div>
+                        <button type="button" class="btn btn-primary" id="add-detail">Ajouter un détail</button>
                     </div>
 
                     <button class="btn btn-primary" type="submit">Soumettre</button>
@@ -35,4 +39,17 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const detailsCollection = document.getElementById('details_collection_wrapper');
+        const addDetailButton = document.getElementById('add-detail');
+
+        addDetailButton.addEventListener('click', function() {
+            let newDetailForm = detailsCollection.dataset.prototype;
+            newDetailForm = newDetailForm.replace(/__name__/g, detailsCollection.children.length);
+            detailsCollection.insertAdjacentHTML('beforeend', newDetailForm);
+        });
+    </script>
 {% endblock %}
