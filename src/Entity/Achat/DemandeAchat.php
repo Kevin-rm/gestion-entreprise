@@ -48,7 +48,7 @@ class DemandeAchat extends AbstractPrefixedIdEntity
         return $this->motif;
     }
 
-    public function setMotif(string $motif): static
+    public function setMotif(?string $motif): static
     {
         $this->motif = $motif;
 
@@ -84,7 +84,7 @@ class DemandeAchat extends AbstractPrefixedIdEntity
         return $this->dateHeure;
     }
 
-    public function setDateHeure(\DateTimeInterface $dateHeure): static
+    public function setDateHeure(?\DateTimeInterface $dateHeure): static
     {
         $this->dateHeure = $dateHeure;
 
