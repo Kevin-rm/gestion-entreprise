@@ -6,19 +6,20 @@ use App\Entity\Achat\DemandeAchat;
 use App\Form\Achat\DemandeAchatType;
 use App\Repository\Achat\DemandeAchatRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/achat/demande')]
+#[Route(path: ['/', '/achat/demande'])]
 final class DemandeAchatController extends AbstractController
 {
     #[Route(name: 'app_achat_demande_achat_index', methods: ['GET'])]
-    public function index(DemandeAchatRepository $demandeAchatRepository): Response
+    public function index(DemandeAchatRepository $demandeAchatRepository, PaginatorInterface $paginator, Request $request): Response
     {
         return $this->render('achat/demande_achat/index.html.twig', [
-            'demande_achats' => $demandeAchatRepository->findAll(),
+            'demande_achats' => $demandeAchatRepository->paginate($paginator, $request->query->getInt("page", 1)),
         ]);
     }
 

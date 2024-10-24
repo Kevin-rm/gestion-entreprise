@@ -1,38 +1,42 @@
-{% extends 'base.html.twig' %}
+{% extends 'main_layout.html.twig' %}
 
-{% block title %}DemandeAchat index{% endblock %}
+{% block breadcrumb %}
+    <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Demande d'achat</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste</li>
+        </ol>
+    </nav>
+{% endblock %}
 
-{% block body %}
-    <h1>DemandeAchat index</h1>
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Liste des demandes</h6>
+                    <div class="table-responsive pt-2">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Identifiant</th>
+                                <th>Motif</th>
+                                <th>Utilisateur</th>
+                                <th>Fournisseur</th>
+                                <th>Date et heure</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Motif</th>
-                <th>DateHeure</th>
-                <th>StatusValidation</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for demande_achat in demande_achats %}
-            <tr>
-                <td>{{ demande_achat.id }}</td>
-                <td>{{ demande_achat.motif }}</td>
-                <td>{{ demande_achat.dateHeure ? demande_achat.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ demande_achat.statusValidation }}</td>
-                <td>
-                    <a href="{{ path('app_achat_demande_achat_show', {'id': demande_achat.id}) }}">show</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_achat_demande_achat_new') }}">Create new</a>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        {{ knp_pagination_render(demande_achats) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
