@@ -7,6 +7,8 @@ use App\Entity\Tiers\Tiers;
 use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,20 +17,16 @@ class DemandeAchatType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('motif')
-            ->add('dateHeure', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('statusValidation')
-            ->add('utilisateur', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
+            ->add('motif', TextareaType::class, [
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'form-label']
             ])
             ->add('fournisseur', EntityType::class, [
                 'class' => Tiers::class,
                 'choice_label' => 'id',
-            ])
-        ;
+                'attr' => ['class' => 'form-select'],
+                'label_attr' => ['class' => 'form-label']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

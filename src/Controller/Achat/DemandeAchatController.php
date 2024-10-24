@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route(path: ['/', '/achat/demande'])]
+#[Route(['/', '/achat/demande'])]
 final class DemandeAchatController extends AbstractController
 {
     #[Route(name: 'app_achat_demande_achat_index', methods: ['GET'])]

@@ -1,11 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'main_layout.html.twig' %}
 
-{% block title %}New DemandeAchat{% endblock %}
+{% block breadcrumb %}
+    <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Demande d'achat</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Saisie</li>
+        </ol>
+    </nav>
+{% endblock %}
 
-{% block body %}
-    <h1>Create new DemandeAchat</h1>
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Nouvelle demande</h4>
+                    {{ form_start(form) }}
 
-    {{ include('achat/demande_achat/_form.html.twig') }}
+                    <div class="mb-3">
+                        {{ form_label(form.motif) }}
+                        {{ form_widget(form.motif) }}
+                        {{ form_errors(form.motif) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.fournisseur) }}
+                        {{ form_widget(form.fournisseur) }}
+                        {{ form_errors(form.fournisseur) }}
+                    </div>
 
-    <a href="{{ path('app_achat_demande_achat_index') }}">back to list</a>
+                    <button class="btn btn-primary" type="submit">Soumettre</button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
