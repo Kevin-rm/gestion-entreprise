@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Stock</title>
+</head>
+<body>
+    <h1>Test des Méthodes de Calcul du Stock</h1>
+
+    <form method="POST" action="{{ path('test_stock') }}">
+        <label for="produit">Produit :</label>
+        <select name="produit_id" id="produit">
+            {% for produit in produits %}
+                <option value="{{ produit.id }}">{{ produit.designation }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="method">Méthode :</label>
+        <select name="method" id="method">
+            <option value="FIFO">FIFO</option>
+            <option value="LIFO">LIFO</option>
+            <option value="CNUP">CNUP</option>
+        </select>
+
+        <button type="submit">Calculer la valeur du stock</button>
+    </form>
+
+    {% if valeurStock is defined %}
+        <h2>Valeur du stock ({{ method }}): {{ valeurStock }}</h2>
+    {% endif %}
+</body>
+</html>

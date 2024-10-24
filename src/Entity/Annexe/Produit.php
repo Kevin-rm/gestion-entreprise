@@ -5,6 +5,7 @@ namespace App\Entity\Annexe;
 use App\Entity\Generic\AbstractPrefixedIdEntity;
 use App\Repository\Annexe\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit extends AbstractPrefixedIdEntity
@@ -15,6 +16,9 @@ class Produit extends AbstractPrefixedIdEntity
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(name: "id_unite")]
     private ?Unite $unite = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    private ?string $prixUnitaire = null;
 
     public function getDesignation(): ?string
     {
@@ -36,6 +40,18 @@ class Produit extends AbstractPrefixedIdEntity
     public function setUnite(?Unite $unite): static
     {
         $this->unite = $unite;
+
+        return $this;
+    }
+
+    public function getPrixUnitaire(): ?string
+    {
+        return $this->prixUnitaire;
+    }
+
+    public function setPrixUnitaire(string $prixUnitaire): static
+    {
+        $this->prixUnitaire = $prixUnitaire;
 
         return $this;
     }
