@@ -4,12 +4,11 @@ namespace App\Entity\DocumentCommercial;
 
 use App\Entity\Annexe\Produit;
 use App\Entity\Generic\AbstractPrefixedIdEntity;
-use App\Repository\DocumentCommercial\DetailsDocumentCommercialRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DetailsDocumentCommercialRepository::class)]
-class DetailsDocumentCommercial extends AbstractPrefixedIdEntity
+#[ORM\MappedSuperclass]
+abstract class DetailsDocumentCommercial extends AbstractPrefixedIdEntity
 {
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(name: "id_produit", nullable: false)]
@@ -23,10 +22,6 @@ class DetailsDocumentCommercial extends AbstractPrefixedIdEntity
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
     private ?string $tva = null;
-
-    #[ORM\ManyToOne(inversedBy: 'details')]
-    #[ORM\JoinColumn(name: "document_commercial", nullable: false)]
-    private ?AbstractDocumentCommercial $documentCommercial = null;
 
     public function getProduit(): ?Produit
     {
@@ -76,25 +71,7 @@ class DetailsDocumentCommercial extends AbstractPrefixedIdEntity
         return $this;
     }
 
-    public function getDocumentCommercial(): ?AbstractDocumentCommercial
-    {
-        return $this->documentCommercial;
-    }
+    public abstract function getDocumentCommercial(): ?AbstractDocumentCommercial;
 
-    public function setDocumentCommercial(?AbstractDocumentCommercial $documentCommercial): static
-    {
-        $this->documentCommercial = $documentCommercial;
-
-        return $this;
-    }
-
-    public function getPrefix(): string
-    {
-        return "DETDC";
-    }
-
-    public function getSequenceName(): string
-    {
-        return "ID_DETAILS_DOCUMENT_COMMERCIAL_SEQ";
-    }
+    public abstract function setDocumentCommercial(?AbstractDocumentCommercial $documentCommercial): static;
 }

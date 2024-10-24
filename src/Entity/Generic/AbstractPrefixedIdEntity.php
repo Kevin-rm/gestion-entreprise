@@ -18,7 +18,7 @@ abstract class AbstractPrefixedIdEntity
         return $this->id;
     }
 
-    abstract public function getPrefix(): string;
+    public abstract function getPrefix(): string;
 
-    abstract public function getSequenceName(): string;
+    public abstract function getSequenceName(): string;
 }

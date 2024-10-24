@@ -27,24 +27,24 @@ class MouvementStock extends AbstractPrefixedIdEntity
         $this->details = new ArrayCollection();
     }
 
-    public function getTypeMouvementStock(): TypeMouvementStock
+    public function getTypeMouvementStock(): ?TypeMouvementStock
     {
         return $this->typeMouvementStock;
     }
 
-    public function setTypeMouvementStock(TypeMouvementStock $typeMouvementStock): static
+    public function setTypeMouvementStock(?TypeMouvementStock $typeMouvementStock): static
     {
         $this->typeMouvementStock = $typeMouvementStock;
 
         return $this;
     }
 
-    public function getDateHeure(): \DateTimeInterface
+    public function getDateHeure(): ?\DateTimeInterface
     {
         return $this->dateHeure;
     }
 
-    public function setDateHeure(\DateTimeInterface $dateHeure): static
+    public function setDateHeure(?\DateTimeInterface $dateHeure): static
     {
         $this->dateHeure = $dateHeure;
 

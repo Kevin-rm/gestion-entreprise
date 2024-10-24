@@ -20,6 +20,12 @@ class BonDeCommande extends AbstractDocumentCommercial
     private ?Tiers $fournisseur = null;
 
     /**
+     * @var Collection<int, DetailsBonDeCommande>
+     */
+    #[ORM\OneToMany(targetEntity: DetailsBonDeCommande::class, mappedBy: 'bonDeCommande', orphanRemoval: true)]
+    private Collection $detailsBonDeCommandes;
+
+    /**
      * @var Collection<int, BonDeReception>
      */
     #[ORM\OneToMany(targetEntity: BonDeReception::class, mappedBy: 'bonDeCommande', orphanRemoval: true)]
@@ -28,6 +34,7 @@ class BonDeCommande extends AbstractDocumentCommercial
     public function __construct()
     {
         parent::__construct();
+        $this->detailsBonDeCommandes = new ArrayCollection();
         $this->bonDeReceptions = new ArrayCollection();
     }
 
@@ -51,6 +58,36 @@ class BonDeCommande extends AbstractDocumentCommercial
     public function setFournisseur(?Tiers $fournisseur): static
     {
         $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailsBonDeCommande>
+     */
+    public function getDetailsBonDeCommandes(): Collection
+    {
+        return $this->detailsBonDeCommandes;
+    }
+
+    public function addDetailsBonDeCommande(DetailsBonDeCommande $detailsBonDeCommande): static
+    {
+        if (!$this->detailsBonDeCommandes->contains($detailsBonDeCommande)) {
+            $this->detailsBonDeCommandes->add($detailsBonDeCommande);
+            $detailsBonDeCommande->setDocumentCommercial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsBonDeCommande(DetailsBonDeCommande $detailsBonDeCommande): static
+    {
+        if ($this->detailsBonDeCommandes->removeElement($detailsBonDeCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailsBonDeCommande->getDocumentCommercial() === $this) {
+                $detailsBonDeCommande->setDocumentCommercial(null);
+            }
+        }
 
         return $this;
     }
